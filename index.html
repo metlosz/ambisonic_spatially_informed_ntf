@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta name="google-site-verification" content="ftFOlJETX-2KNjaPh8W6s8lhigItRuu9fOmjHZZ0nY0" />
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <title>On Ambisonic Source Separation with Spatially Informed Non-negative Tensor Factorization</title>
+   </head>
+   <style type="text/css">
+      table {
+      width: 100%;
+      table-layout: fixed;
+      }
+      audio {
+      width: 100%;
+      }
+      thead>tr>th:first-child {
+      width: 96px;
+      }
+      @media (max-width: 767px) {
+      .big-screen {
+      display: none;
+      }
+      }
+      @media (min-width: 767px) {
+      .small-screen {
+      display: none;
+      }
+      }
+   </style>
+   <body>
+      <header class="header">
+         <div class="jumbotron bg-secondary text-center">
+            <div class="container">
+               <div class="row align-items-center">
+                  <div class="col-md-12">
+                     <h1><a class="text-light"
+                        href="to_be_added_after_publication">On Ambisonic Source Separation with Spatially Informed Non-negative Tensor Factorization</a>
+                     </h1>
+                     <p>
+                     <div class="row">
+                        <div class="col-md col-sm-12"><a class="text-light" href="https://www.researchgate.net/profile/Mateusz-Guzik-2">Mateusz Guzik</a> </div>
+                        <div class="col-md col-sm-12"><a class="text-light" href="https://www.researchgate.net/profile/Konrad-Kowalczyk-2">Konrad Kowalczyk</a> </div>
+                     </div>
+                     </p>
+                     <p><a class="text-light" href="https://sp.agh.edu.pl/">Signal Processing Group</p>
+                     </a>
+                     <p><a class="text-light" href="https://iet.agh.edu.pl/en/">Institute of Electronics<br>Faculty of Computer Science, Electronics and Telecommunications</p>
+                     </a>
+                     <p><a class="text-light" href="https://www.agh.edu.pl/en/">AGH University of Science and Technology, Kraków, Poland</p>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <main>
+         <div class="container">
+         <div class="row" id="intro">
+            <div class="col">
+               <h2>Sound source separation</h2>
+               <div>
+                  <p align="justify">
+                     In this work, we target the challenging task of Ambisonic-to-Ambisonic reverberant sound source separation, as depicted in Figure 2.
+                     The aim is to estimate individual reverberant source signals, as if no other sound sources were present during the recording.
+                  </p>
+                  <img id="introduction" src="./src/images/separation.png" class="img-fluid" style="width:100%">
+                  <figcaption class="figure-caption text-center">
+                  Figure 1. Ambisonic sound source separation scheme. Retrieval of individual source images.
+               </div>
+            </div>
+         </div>
+         <br>
+         <div class="row" id="binaural">
+         <div class="col">
+            <h2>Binaural audio samples</h2>
+            <p align="justify">
+               We present the audio samples of input mixtures and source signals estimated with the baseline <a class="text-success" href="#1">[1]</a> and one of the five proposed algorithms <a class="text-success" href="#2">[2]</a>, namely the EU-WLP.
+               The presented audio samples include one audio file per one of the three datasets considered in our paper <a class="text-success" href="#2">[2]</a>, namely the MUSIC I, MUSIC II and SPEECH.
+               In here we focus on the under-determined scenario, in which we retrieve source signals of 6 sound sources using first-order Ambisonics with 4 microphone signals, while more results for the over-determined and the determined cases can be found in our paper <a class="text-success" href="#2">[2]</a>. 
+            </p>
+            <p align="justify">
+               Table 1 contains the audio samples of input mixtures for the exemplary files, while Tables 2 - 4 contain the source signals separated with the baseline <a class="text-success" href="#1">[1]</a> and the EU-WLP <a class="text-success" href="#2">[2]</a>, in case of the MUSIC I, MUSIC II and SPEECH datasets, respectively.
+            </p>
+            <p align="justify">
+               All audio samples were decoded from the Ambisonic to the binaural format with the magLS method <a class="text-success" href="#3">[3]</a>, using the <a class="text-success" href="https://github.com/chris-hld/spaudiopy/tree/master">spaudiopy</a> library - please use headphones for best experience.
+            </p>
+            <p align="justify">
+               Note, that the estimated source signals were assigned to their target counterparts by considering the best overall Signal-to-Distortion-Ratio.
+               Combined with the reoccurring inability of the baseline algorithm to properly separate source signals, this can produce somewhat unintuitive estimate-to-source mapping, especially when considering only an isolated audio example, as is the case for example in Table 2, row 1.
+            </p>
+            <br>
+            <h4>
+               Table 1. Input mixtures for the exemplary audio files.
+            </h4>
+            <div class="big-screen">
+               <table class="table">
+                  <thead>
+                     <tr>
+                        <th style="width: 0px"></th>
+                        <th style="text-align: center;">MUSIC I</th>
+                        <th style="text-align: center;">MUSIC II</th>
+                        <th style="text-align: center;">SPEECH</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="width: 0px"></td>
+                        <td>
+                           <img id="introduction" src="./src/images/MUSIC_I/input.png" class="img-fluid" style="width:100%">
+                           <audio controls>
+                              <source src="./src/audio/MUSIC_I/input.wav" type="audio/wav" />
+                              Your browser does not support the audio element.
+                           </audio>
+                        </td>
+                        <td>
+                           <img id="introduction" src="./src/images/MUSIC_II/input.png" class="img-fluid" style="width:100%">
+                           <audio controls>
+                              <source src="./src/audio/MUSIC_II/input.wav" type="audio/wav" />
+                              Your browser does not support the audio element.
+                           </audio>
+                        </td>
+                        <td>
+                           <img id="introduction" src="./src/images/SPEECH/input.png" class="img-fluid" style="width:100%">
+                           <audio controls>
+                              <source src="./src/audio/SPEECH/input.wav" type="audio/wav" />
+                              Your browser does not support the audio element.
+                           </audio>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <br>
+            <div class="row" id="music_i_samples">
+               <div class="col">
+                  <div>
+                     <h4>
+                        Table 2. Separated source signals for the exemplary file from MUSIC I dataset.
+                     </h4>
+                     <div class="big-screen">
+                        <table class="table">
+                           <thead>
+                              <tr>
+                                 <th style="width: 0px"></th>
+                                 <th style="text-align: center;">Target</th>
+                                 <th style="text-align: center;">Baseline <a class="text-success" href="#1">[1]</a></th>
+                                 <th style="text-align: center;">Proposed <a class="text-success" href="#2">[2]</a></th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/target/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/target/1.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/baseline/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/baseline/1.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/proposed/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/proposed/1.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/target/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/target/2.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/baseline/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/baseline/2.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/proposed/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/proposed/2.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/target/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/target/3.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/baseline/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/baseline/3.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/proposed/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/proposed/3.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/target/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/target/4.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/baseline/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/baseline/4.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/proposed/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/proposed/4.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/target/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/target/5.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/baseline/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/baseline/5.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/proposed/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/proposed/5.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/target/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/target/6.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/baseline/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/baseline/6.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_I/proposed/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_I/proposed/6.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <br>
+            <div class="row" id="music_ii_samples">
+               <div class="col">
+                  <div>
+                     <h4>
+                        Table 3. Separated source signals for the exemplary file from MUSIC II dataset.
+                     </h4>
+                     <div class="big-screen">
+                        <table class="table">
+                           <thead>
+                              <tr>
+                                 <th style="width: 0px"></th>
+                                 <th style="text-align: center;">Target</th>
+                                 <th style="text-align: center;">Baseline <a class="text-success" href="#1">[1]</a></th>
+                                 <th style="text-align: center;">Proposed <a class="text-success" href="#2">[2]</a></th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/target/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/target/1.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/baseline/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/baseline/1.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/proposed/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/proposed/1.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/target/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/target/2.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/baseline/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/baseline/2.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/proposed/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/proposed/2.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/target/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/target/3.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/baseline/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/baseline/3.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/proposed/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/proposed/3.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/target/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/target/4.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/baseline/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/baseline/4.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/proposed/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/proposed/4.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/target/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/target/5.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/baseline/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/baseline/5.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/proposed/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/proposed/5.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/target/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/target/6.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/baseline/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/baseline/6.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/MUSIC_II/proposed/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/MUSIC_II/proposed/6.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <br>
+            <div class="row" id="speech_samples">
+               <div class="col">
+                  <div>
+                     <h4>
+                        Table 4. Separated source signals for the exemplary file from SPEECH dataset.
+                     </h4>
+                     <div class="big-screen">
+                        <table class="table">
+                           <thead>
+                              <tr>
+                                 <th style="width: 0px"></th>
+                                 <th style="text-align: center;">Target</th>
+                                 <th style="text-align: center;">Baseline <a class="text-success" href="#1">[1]</a></th>
+                                 <th style="text-align: center;">Proposed <a class="text-success" href="#2">[2]</a></th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/target/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/target/1.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/baseline/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/baseline/1.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/proposed/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/proposed/1.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/target/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/target/2.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/baseline/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/baseline/2.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/proposed/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/proposed/2.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/target/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/target/3.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/baseline/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/baseline/3.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/proposed/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/proposed/3.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/target/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/target/4.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/baseline/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/baseline/4.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/proposed/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/proposed/4.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/target/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/target/5.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/baseline/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/baseline/5.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/proposed/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/proposed/5.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/target/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/target/6.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/baseline/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/baseline/6.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="introduction" src="./src/images/SPEECH/proposed/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/audio/SPEECH/proposed/6.wav" type="audio/wav" />
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <br>
+            <div class="row" id="ref">
+               <div class="col">
+                  <h2>References</h2>
+                  <div>
+                     <p>
+                        <a name="1">[1]</a> J. Nikunen and A. Politis, <a class="text-success" href="https://ieeexplore.ieee.org/abstract/document/8521344">“Multichannel NMF for source separation with ambisonic signals”</a>,
+                        2018 16th International Workshop on Acoustic Signal Enhancement (IWAENC), Tokyo, Japan, 2018, pp. 251-255, doi: 10.1109/IWAENC.2018.8521344.
+                     </p>
+                  </div>
+                  <div>
+                     <p>
+                        <a name="2">[2]</a> M. Guzik and K. Kowalczyk, <a class="text-success" href="to_be_added_after_publication">“On Ambisonic Source Separation with Spatially Informed Non-negative Tensor Factorization”</a>,
+                        to be added after publication
+                     </p>
+                  </div>
+                  <div>
+                     <p>
+                        <a name="3">[3]</a> C. Hold and N. Meyer-Kahlen and V. Pulkki, <a class="text-success" href="https://www.researchgate.net/publication/369744013_Magnitude-Least-Squares_Binaural_Ambisonic_Rendering_with_Phase_Continuation">“Magnitude-Least-Squares Binaural Ambisonic Rendering with Phase Continuation”</a>,
+                        Jahrestagung für Akustik 2023 Mar 31.
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </main>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+         crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+         crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+         crossorigin="anonymous"></script>
+   </body>
+</html>
