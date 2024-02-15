@@ -1,0 +1,1287 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta name="google-site-verification" content="ftFOlJETX-2KNjaPh8W6s8lhigItRuu9fOmjHZZ0nY0" />
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <title>On Ambisonic Source Separation with Spatially Informed Non-negative Tensor Factorization</title>
+   </head>
+   <style type="text/css">
+      table {
+      width: 100%;
+      table-layout: fixed;
+      }
+      audio {
+      width: 100%;
+      }
+   </style>
+   <body>
+      <header class="header">
+         <div class="jumbotron bg-secondary text-center">
+            <div class="container">
+               <div class="row align-items-center">
+                  <div class="col-md-12">
+                     <h1><a class="text-light"
+                        href="">On Ambisonic Source Separation with Spatially Informed Non-negative Tensor Factorization</a>
+                     </h1>
+                     <p>
+                     <div class="row">
+                        <div class="col-md col-sm-12"><a class="text-light" href="https://www.researchgate.net/profile/Mateusz-Guzik-2">Mateusz Guzik</a> </div>
+                        <div class="col-md col-sm-12"><a class="text-light" href="https://www.researchgate.net/profile/Konrad-Kowalczyk-2">Konrad Kowalczyk</a> </div>
+                     </div>
+                     </p>
+                     <p><a class="text-light" href="https://sp.agh.edu.pl/">Signal Processing Group</p>
+                     </a>
+                     <p><a class="text-light" href="https://iet.agh.edu.pl/en/">Institute of Electronics<br>Faculty of Computer Science, Electronics and Telecommunications</p>
+                     </a>
+                     <p><a class="text-light" href="https://www.agh.edu.pl/en/">AGH University of Science and Technology, Kraków, Poland</p>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <main>
+         <div class="container">
+         <div class="row" id="intro">
+            <div class="col">
+               <div>
+                  <p align="justify">
+                     This site presents audio samples related to the paper entitled <a class="text-success" href="">On Ambisonic Source Separation with Spatially Informed Non-negative Tensor Factorization</a> <a class="text-success" href="#1">[1]</a>.  
+                  </p>
+                  <h2>Sound source separation</h2>
+                  <p align="justify">
+                     We target the challenging task of Ambisonic-to-Ambisonic reverberant sound source separation.
+                     The aim is to estimate individual reverberant source signals, as if no other sound sources were present during the recording.
+                     The problem overview is depicted in Figure 1.
+                  </p>
+                  <img id="separation" src="./src/separation.png" class="img-fluid" style="width:100%">
+                  <figcaption class="figure-caption text-center">
+                  Figure 1. Ambisonic sound source separation scheme. Retrieval of individual source images.
+               </div>
+            </div>
+         </div>
+         <br>
+         <div class="row" id="binaural">
+         <div class="col">
+            <h2>Binaural audio samples</h2>
+            <p align="justify">
+               We present the audio samples of input mixtures and source signals estimated with reference methods and one of the five proposed algorithms, namely the EU-WLP.
+               The reference methods include PWD, MWF, FastMNMF <a class="text-success" href="#2">[2]</a> and EU <a class="text-success" href="#3">[3]</a>.
+               For more information about the reference methods, source signal retrieval procedure and the proposed solutions, kindly refer to our paper  <a class="text-success" href="#1">[1]</a>.
+            </p>
+            <p>
+               The presented audio samples include one audio file per one of the four datasets considered in our paper, namely the MUSIC I, MUSIC II, SPEECH and DSD100 <a class="text-success" href="#4">[4]</a>.
+               In cases of the MUSIC I, MUSIC II and SPEECH datasets, we focus on the under-determined scenario, in which we retrieve source signals of 6 sound sources using first-order Ambisonics, that is derived from 4 directional signals.
+               Due to the limitations of the DSD100 dataset, in its case, we present samples for the determined scenario, where 4 source signals are retrieved.
+               More information on the aforementioned datasets can be found in our paper <a class="text-success" href="#1">[1]</a>. 
+            </p>
+            <p align="justify">
+               Table 1 presents the audio samples of input mixtures for the exemplary files, while Tables 2 - 5 present source signals separated with the reference methods and the proposed EU-WLP, in case of the MUSIC I, MUSIC II, SPEECH and DSD100 datasets, respectively.
+            </p>
+            <p align="justify">
+               All audio samples were decoded from the Ambisonic to the binaural format with the magLS method <a class="text-success" href="#5">[5]</a>, using the <a class="text-success" href="https://github.com/chris-hld/spaudiopy/tree/master">spaudiopy</a> library - please use headphones for best experience.
+            </p>
+            <p align="justify">
+               Note, that the estimated source signals were assigned to their target counterparts by considering the best overall Signal-to-Distortion-Ratio.
+               Combined with the reoccurring inability of the reference algorithms to properly separate source signals, this can produce somewhat unintuitive estimate-to-target mapping.
+            </p>
+            <br>
+            <h4>
+               Table 1. Input mixtures for the exemplary audio files.
+            </h4>
+            <div class="big-screen">
+               <table class="table">
+                  <thead>
+                     <tr>
+                        <th style="width: 0px"></th>
+                        <th style="text-align: center;">MUSIC I</th>
+                        <th style="text-align: center;">MUSIC II</th>
+                        <th style="text-align: center;">SPEECH</th>
+                        <th style="text-align: center;">DSD100</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="width: 0px"></td>
+                        <td>
+                           <img id="MI_GT_mix" src="./src/GT/MUSIC_I/images/mix.png" class="img-fluid" style="width:100%">
+                           <audio controls>
+                              <source src="./src/GT/MUSIC_I/audio/mix.wav" type="audio/wav" />
+                              Your browser does not support the audio element.
+                           </audio>
+                        </td>
+                        <td>
+                           <img id="MII_GT_mix" src="./src/GT/MUSIC_II/images/mix.png" class="img-fluid" style="width:100%">
+                           <audio controls>
+                              <source src="./src/GT/MUSIC_II/audio/mix.wav" type="audio/wav" />
+                              Your browser does not support the audio element.
+                           </audio>
+                        </td>
+                        <td>
+                           <img id="S_GT_mix" src="./src/GT/SPEECH/images/mix.png" class="img-fluid" style="width:100%">
+                           <audio controls>
+                              <source src="./src/GT/SPEECH/audio/mix.wav" type="audio/wav" />
+                              Your browser does not support the audio element.
+                           </audio>
+                        </td>
+                        <td>
+                           <img id="D_GT_mix" src="./src/GT/DSD100/images/mix.png" class="img-fluid" style="width:100%">
+                           <audio controls>
+                              <source src="./src/GT/DSD100/audio/mix.wav" type="audio/wav" />
+                              Your browser does not support the audio element.
+                           </audio>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <br>
+            <div class="row" id="MUSIC_I_samples">
+               <div class="col">
+                  <div>
+                     <h4>
+                        Table 2. Separated source signals for the exemplary file from MUSIC I dataset.
+                     </h4>
+                     <div class="big-screen">
+                        <table class="table">
+                           <thead>
+                              <tr>
+                                 <th style="width: 0px"></th>
+                                 <th style="text-align: center;">Target</th>
+                                 <th style="text-align: center;">PWD</th>
+                                 <th style="text-align: center;">MWF</th>
+                                 <th style="text-align: center;">FastMNMF <a class="text-success" href="#2">[2]</a></th>
+                                 <th style="text-align: center;">EU <a class="text-success" href="#3">[3]</a></th>
+                                 <th style="text-align: center;">Proposed EU-WLP</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MI_GT_1" src="./src/GT/MUSIC_I/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_I/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_PWD_1" src="./src/PWD/MUSIC_I/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_I/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_MWF_1" src="./src/MWF/MUSIC_I/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_I/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_FMNMF_1" src="./src/FMNMF/MUSIC_I/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_I/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_1" src="./src/EU/MUSIC_I/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_I/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_WLP_1" src="./src/EU_WLP/MUSIC_I/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_I/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MI_GT_2" src="./src/GT/MUSIC_I/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_I/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_PWD_2" src="./src/PWD/MUSIC_I/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_I/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_MWF_2" src="./src/MWF/MUSIC_I/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_I/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_FMNMF_2" src="./src/FMNMF/MUSIC_I/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_I/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_2" src="./src/EU/MUSIC_I/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_I/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_WLP_2" src="./src/EU_WLP/MUSIC_I/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_I/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MI_GT_3" src="./src/GT/MUSIC_I/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_I/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_PWD_3" src="./src/PWD/MUSIC_I/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_I/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_MWF_3" src="./src/MWF/MUSIC_I/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_I/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_FMNMF_3" src="./src/FMNMF/MUSIC_I/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_I/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_3" src="./src/EU/MUSIC_I/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_I/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_WLP_3" src="./src/EU_WLP/MUSIC_I/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_I/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MI_GT_4" src="./src/GT/MUSIC_I/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_I/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_PWD_4" src="./src/PWD/MUSIC_I/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_I/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_MWF_4" src="./src/MWF/MUSIC_I/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_I/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_FMNMF_4" src="./src/FMNMF/MUSIC_I/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_I/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_4" src="./src/EU/MUSIC_I/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_I/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_WLP_4" src="./src/EU_WLP/MUSIC_I/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_I/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MI_GT_5" src="./src/GT/MUSIC_I/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_I/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_PWD_5" src="./src/PWD/MUSIC_I/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_I/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_MWF_5" src="./src/MWF/MUSIC_I/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_I/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_FMNMF_5" src="./src/FMNMF/MUSIC_I/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_I/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_5" src="./src/EU/MUSIC_I/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_I/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_WLP_5" src="./src/EU_WLP/MUSIC_I/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_I/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MI_GT_6" src="./src/GT/MUSIC_I/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_I/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_PWD_6" src="./src/PWD/MUSIC_I/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_I/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_MWF_6" src="./src/MWF/MUSIC_I/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_I/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_FMNMF_6" src="./src/FMNMF/MUSIC_I/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_I/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_6" src="./src/EU/MUSIC_I/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_I/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MI_EU_WLP_6" src="./src/EU_WLP/MUSIC_I/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_I/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <br>
+            <div class="row" id="MUSIC_II_samples">
+               <div class="col">
+                  <div>
+                     <h4>
+                        Table 3. Separated source signals for the exemplary file from MUSIC II dataset.
+                     </h4>
+                     <div class="big-screen">
+                        <table class="table">
+                           <thead>
+                              <tr>
+                                 <th style="width: 0px"></th>
+                                 <th style="text-align: center;">Target</th>
+                                 <th style="text-align: center;">PWD</th>
+                                 <th style="text-align: center;">MWF</th>
+                                 <th style="text-align: center;">FastMNMF <a class="text-success" href="#2">[2]</a></th>
+                                 <th style="text-align: center;">EU <a class="text-success" href="#3">[3]</a></th>
+                                 <th style="text-align: center;">Proposed EU-WLP</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MII_GT_1" src="./src/GT/MUSIC_II/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_II/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_PWD_1" src="./src/PWD/MUSIC_II/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_II/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_MWF_1" src="./src/MWF/MUSIC_II/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_II/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_FMNMF_1" src="./src/FMNMF/MUSIC_II/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_II/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_1" src="./src/EU/MUSIC_II/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_II/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_WLP_1" src="./src/EU_WLP/MUSIC_II/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_II/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MII_GT_2" src="./src/GT/MUSIC_II/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_II/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_PWD_2" src="./src/PWD/MUSIC_II/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_II/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_MWF_2" src="./src/MWF/MUSIC_II/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_II/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_FMNMF_2" src="./src/FMNMF/MUSIC_II/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_II/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_2" src="./src/EU/MUSIC_II/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_II/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_WLP_2" src="./src/EU_WLP/MUSIC_II/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_II/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MII_GT_3" src="./src/GT/MUSIC_II/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_II/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_PWD_3" src="./src/PWD/MUSIC_II/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_II/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_MWF_3" src="./src/MWF/MUSIC_II/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_II/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_FMNMF_3" src="./src/FMNMF/MUSIC_II/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_II/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_3" src="./src/EU/MUSIC_II/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_II/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_WLP_3" src="./src/EU_WLP/MUSIC_II/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_II/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MII_GT_4" src="./src/GT/MUSIC_II/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_II/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_PWD_4" src="./src/PWD/MUSIC_II/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_II/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_MWF_4" src="./src/MWF/MUSIC_II/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_II/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_FMNMF_4" src="./src/FMNMF/MUSIC_II/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_II/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_4" src="./src/EU/MUSIC_II/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_II/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_WLP_4" src="./src/EU_WLP/MUSIC_II/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_II/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MII_GT_5" src="./src/GT/MUSIC_II/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_II/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_PWD_5" src="./src/PWD/MUSIC_II/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_II/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_MWF_5" src="./src/MWF/MUSIC_II/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_II/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_FMNMF_5" src="./src/FMNMF/MUSIC_II/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_II/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_5" src="./src/EU/MUSIC_II/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_II/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_WLP_5" src="./src/EU_WLP/MUSIC_II/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_II/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="MII_GT_6" src="./src/GT/MUSIC_II/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/MUSIC_II/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_PWD_6" src="./src/PWD/MUSIC_II/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/MUSIC_II/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_MWF_6" src="./src/MWF/MUSIC_II/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/MUSIC_II/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_FMNMF_6" src="./src/FMNMF/MUSIC_II/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/MUSIC_II/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_6" src="./src/EU/MUSIC_II/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/MUSIC_II/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="MII_EU_WLP_6" src="./src/EU_WLP/MUSIC_II/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/MUSIC_II/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <br>
+            <div class="row" id="SPEECH_samples">
+               <div class="col">
+                  <div>
+                     <h4>
+                        Table 4. Separated source signals for the exemplary file from SPEECH dataset.
+                     </h4>
+                     <div class="big-screen">
+                        <table class="table">
+                           <thead>
+                              <tr>
+                                 <th style="width: 0px"></th>
+                                 <th style="text-align: center;">Target</th>
+                                 <th style="text-align: center;">PWD</th>
+                                 <th style="text-align: center;">MWF</th>
+                                 <th style="text-align: center;">FastMNMF <a class="text-success" href="#2">[2]</a></th>
+                                 <th style="text-align: center;">EU <a class="text-success" href="#3">[3]</a></th>
+                                 <th style="text-align: center;">Proposed EU-WLP</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="S_GT_1" src="./src/GT/SPEECH/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/SPEECH/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_PWD_1" src="./src/PWD/SPEECH/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/SPEECH/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_MWF_1" src="./src/MWF/SPEECH/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/SPEECH/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_FMNMF_1" src="./src/FMNMF/SPEECH/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/SPEECH/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_1" src="./src/EU/SPEECH/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/SPEECH/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_WLP_1" src="./src/EU_WLP/SPEECH/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/SPEECH/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="S_GT_2" src="./src/GT/SPEECH/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/SPEECH/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_PWD_2" src="./src/PWD/SPEECH/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/SPEECH/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_MWF_2" src="./src/MWF/SPEECH/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/SPEECH/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_FMNMF_2" src="./src/FMNMF/SPEECH/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/SPEECH/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_2" src="./src/EU/SPEECH/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/SPEECH/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_WLP_2" src="./src/EU_WLP/SPEECH/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/SPEECH/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="S_GT_3" src="./src/GT/SPEECH/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/SPEECH/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_PWD_3" src="./src/PWD/SPEECH/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/SPEECH/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_MWF_3" src="./src/MWF/SPEECH/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/SPEECH/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_FMNMF_3" src="./src/FMNMF/SPEECH/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/SPEECH/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_3" src="./src/EU/SPEECH/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/SPEECH/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_WLP_3" src="./src/EU_WLP/SPEECH/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/SPEECH/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="S_GT_4" src="./src/GT/SPEECH/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/SPEECH/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_PWD_4" src="./src/PWD/SPEECH/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/SPEECH/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_MWF_4" src="./src/MWF/SPEECH/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/SPEECH/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_FMNMF_4" src="./src/FMNMF/SPEECH/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/SPEECH/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_4" src="./src/EU/SPEECH/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/SPEECH/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_WLP_4" src="./src/EU_WLP/SPEECH/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/SPEECH/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="S_GT_5" src="./src/GT/SPEECH/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/SPEECH/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_PWD_5" src="./src/PWD/SPEECH/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/SPEECH/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_MWF_5" src="./src/MWF/SPEECH/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/SPEECH/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_FMNMF_5" src="./src/FMNMF/SPEECH/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/SPEECH/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_5" src="./src/EU/SPEECH/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/SPEECH/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_WLP_5" src="./src/EU_WLP/SPEECH/images/5.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/SPEECH/audio/5.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="S_GT_6" src="./src/GT/SPEECH/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/SPEECH/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_PWD_6" src="./src/PWD/SPEECH/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/SPEECH/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_MWF_6" src="./src/MWF/SPEECH/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/SPEECH/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_FMNMF_6" src="./src/FMNMF/SPEECH/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/SPEECH/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_6" src="./src/EU/SPEECH/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/SPEECH/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="S_EU_WLP_6" src="./src/EU_WLP/SPEECH/images/6.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/SPEECH/audio/6.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <br>
+            <div class="row" id="DSD100_samples">
+               <div class="col">
+                  <div>
+                     <h4>
+                        Table 5. Separated source signals for the exemplary file from DSD100 dataset.
+                     </h4>
+                     <div class="big-screen">
+                        <table class="table">
+                           <thead>
+                              <tr>
+                                 <th style="width: 0px"></th>
+                                 <th style="text-align: center;">Target</th>
+                                 <th style="text-align: center;">PWD</th>
+                                 <th style="text-align: center;">MWF</th>
+                                 <th style="text-align: center;">FastMNMF <a class="text-success" href="#2">[2]</a></th>
+                                 <th style="text-align: center;">EU <a class="text-success" href="#3">[3]</a></th>
+                                 <th style="text-align: center;">Proposed EU-WLP</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="D_GT_1" src="./src/GT/DSD100/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/DSD100/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_PWD_1" src="./src/PWD/DSD100/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/DSD100/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_MWF_1" src="./src/MWF/DSD100/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/DSD100/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_FMNMF_1" src="./src/FMNMF/DSD100/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/DSD100/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_EU_1" src="./src/EU/DSD100/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/DSD100/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_EU_WLP_1" src="./src/EU_WLP/DSD100/images/1.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/DSD100/audio/1.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="D_GT_2" src="./src/GT/DSD100/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/DSD100/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_PWD_2" src="./src/PWD/DSD100/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/DSD100/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_MWF_2" src="./src/MWF/DSD100/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/DSD100/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_FMNMF_2" src="./src/FMNMF/DSD100/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/DSD100/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_EU_2" src="./src/EU/DSD100/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/DSD100/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_EU_WLP_2" src="./src/EU_WLP/DSD100/images/2.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/DSD100/audio/2.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="D_GT_3" src="./src/GT/DSD100/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/DSD100/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_PWD_3" src="./src/PWD/DSD100/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/DSD100/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_MWF_3" src="./src/MWF/DSD100/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/DSD100/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_FMNMF_3" src="./src/FMNMF/DSD100/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/DSD100/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_EU_3" src="./src/EU/DSD100/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/DSD100/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_EU_WLP_3" src="./src/EU_WLP/DSD100/images/3.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/DSD100/audio/3.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width: 0px"></td>
+                                 <td>
+                                    <img id="D_GT_4" src="./src/GT/DSD100/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/GT/DSD100/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_PWD_4" src="./src/PWD/DSD100/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/PWD/DSD100/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_MWF_4" src="./src/MWF/DSD100/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/MWF/DSD100/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_FMNMF_4" src="./src/FMNMF/DSD100/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/FMNMF/DSD100/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_EU_4" src="./src/EU/DSD100/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU/DSD100/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                                 <td>
+                                    <img id="D_EU_WLP_4" src="./src/EU_WLP/DSD100/images/4.png" class="img-fluid" style="width:100%">
+                                    <audio controls>
+                                       <source src="./src/EU_WLP/DSD100/audio/4.wav" type="audio/wav"/>
+                                       Your browser does not support the audio element.
+                                    </audio>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <br>
+            <div class="row" id="ref">
+               <div class="col">
+                  <h2>References</h2>
+                  <div>
+                     <p>
+                        <a name="1">[1]</a> M. Guzik and K. Kowalczyk, <a class="text-success" href="">“On Ambisonic Source Separation with Spatially Informed Non-negative Tensor Factorization”</a>.
+                     </p>
+                  </div>
+                  <div>
+                     <p>
+                        <a name="2">[2]</a> K. Sekiguchi and A. A. Nugraha and Y. Bando and K. Yoshii, <a class="text-success" href="https://ieeexplore.ieee.org/abstract/document/8902557">“Fast Multichannel Source Separation Based on Jointly Diagonalizable Spatial Covariance Matrices”</a>, European Signal Processing Conference (EUSIPCO), 2019, doi.org/10.23919/EUSIPCO.2019.8902557.
+                     </p>
+                  </div>
+                  <div>
+                     <p>
+                        <a name="3">[3]</a> J. Nikunen and A. Politis, <a class="text-success" href="https://ieeexplore.ieee.org/abstract/document/8521344">“Multichannel NMF for source separation with ambisonic signals”</a>, International Workshop on Acoustic Signal Enhancement (IWAENC), 2018, doi.org/10.1109/IWAENC.2018.8521344.
+                     </p>
+                  </div>
+                  <div>
+                     <p>
+                        <a name="4">[4]</a> A. Liutkus and F. R. Stöter and Z. Rafii and D. Kitamura and B. Rivet and N. Ito and N. Ono and J. Fontecave, <a class="text-success" href="https://link.springer.com/chapter/10.1007/978-3-319-53547-0_31">“The 2016 Signal Separation Evaluation Campaign”</a>, The 2016 Signal Separation Evaluation Campaign (SiSEC16), 2017, doi.org/10.1007/978-3-319-53547-0_31.
+                     </p>
+                  </div>
+                  <div>
+                     <p>
+                        <a name="5">[5]</a> C. Schörkhuber and M. Zaunschirm and R. Höldrich, <a class="text-success" href="https://pub.dega-akustik.de/DAGA_2018/data/articles/000301.pdf">"Binaural rendering of ambisonic signals via magnitude least squares"</a>,
+                        Fortschritter der Akustik (DAGA), 2018.
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </main>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+         crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+         crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+         crossorigin="anonymous"></script>
+   </body>
+</html>
