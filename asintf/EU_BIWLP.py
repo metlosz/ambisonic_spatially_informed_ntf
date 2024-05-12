@@ -15,7 +15,7 @@ class EU_BIWLP(EU_IWLP):
     References
     ----------
     [1] M. Guzik and K. Kowalczyk, "On Ambisonic Source Separation with Spatially Informed Non-negative Tensor
-    Factorization". (to be completed after publication)
+    Factorization," in IEEE/ACM Transactions on Audio, Speech, and Language Processing, doi: 10.1109/TASLP.2024.3399618.
 
     Notes
     -----
