@@ -1,0 +1,5 @@
+*.ipynb_checkpoints
+*.egg-info/
+*__pycache__
+*.idea/
+*.spa_cache_dir
