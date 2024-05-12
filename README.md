@@ -6,7 +6,9 @@ It contains implementation of the reference and the proposed source separation a
 # Installation
 The default setup is based on the [Conda](https://docs.anaconda.com/free/miniconda/#quick-command-line-install) package manager.
 Run the installation script and activate the environment:
+
 > setup.sh
+
 > conda activate asintf
 
 # Usage
