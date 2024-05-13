@@ -21,9 +21,9 @@ If you use this implementation please cite the following paper:
 https://ieeexplore.ieee.org/document/10528859
 
 ```
-@ARTICLE{10528859,
+@ARTICLE{Guzik2024,
   author={Guzik, Mateusz and Kowalczyk, Konrad},
-  journal={IEEE/ACM Transactions on Audio, Speech, and Language Processing}, 
+  journal={IEEE/ACM Transactions on Audio, Speech, and Language Processing},
   title={On Ambisonic Source Separation with Spatially Informed Non-negative Tensor Factorization}, 
   year={2024},
   doi={10.1109/TASLP.2024.3399618}}
