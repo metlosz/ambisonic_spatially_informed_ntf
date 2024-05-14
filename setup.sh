@@ -1,10 +1,11 @@
 #!/bin/bash
 #coding=utf-8
 
+# Set error behavior
 set -euo pipefail
 
-# Get the scipt directory (this will fail for symbolic link as last path component)
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+# Get script directory
+SCRIPT_DIR=$(realpath $(dirname $0))
 
 # Initialize conda
 CONDA_DIR=$(conda info --base)
