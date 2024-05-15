@@ -56,7 +56,8 @@ class EU_IWLP(EU, PriorBase):
         z_n = einsum('jft, ftab, dab -> jd', self._V, self._R, self._S, optimize=self._Z_path[0])
         z_d = einsum('jft, ftab, dab -> jd', self._V, self._hatR.sum(0), self._S, optimize=self._Z_path[0])
         trXIinvS = einsum('jab, dab -> jd', XIinv, self._S, optimize=self._Z_path[1])
-        trPsiXIinvSXIinv = einsum('jab, jab, dab, jab -> jd', self._Psi, XIinv, self._S, XIinv, optimize=self._Z_path[2])
+        trPsiXIinvSXIinv = trace(einsum('jab, jbc, dce, jeg -> jdag', self._Psi, XIinv, self._S, XIinv,
+                                        optimize=self._Z_path[2]), axis1=-2, axis2=-1)
         self._Z *= ((2 * z_n / (self._F * self._T * pi * self._std ** 2) + self._nu * trPsiXIinvSXIinv) /
                     (2 * z_d / (self._F * self._T * pi * self._std ** 2) + self._L * trPsiXIinvSXIinv +
                      (self._nu + self._L) * trXIinvS)).real
@@ -77,7 +78,7 @@ class EU_IWLP(EU, PriorBase):
         Z_path = [
             super()._Z_path,
             einsum_path('jab, dab -> jd', empty((self._J, self._L, self._L)), self._S, optimize='optimal')[0],
-            einsum_path('jab, jab, dab, jab -> jd', self._Psi, empty((self._J, self._L, self._L)), self._S,
+            einsum_path('jab, jbc, dce, jeg -> jdag', self._Psi, empty((self._J, self._L, self._L)), self._S,
                         empty((self._J, self._L, self._L)), optimize='optimal')[0]
         ]
         return Z_path

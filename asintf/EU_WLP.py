@@ -80,7 +80,7 @@ class EU_WLP(EU, PriorBase):
 
     @cached_property
     def _trPsiinvS(self) -> ndarray:
-        return einsum('jab, dab -> jd', self._Psiinv, self._S, optimize='optimal')
+        return einsum('jab, dab -> jd', self._Psiinv, self._S)
 
     @cached_property
     def _Z_path(self) -> List[List[Union[str, Tuple[int]]]]:

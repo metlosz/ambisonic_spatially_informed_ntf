@@ -49,8 +49,8 @@ class IS_WLP(IS, PriorBase):
 
     def update_Z(self) -> None:
         hatRinv = pinv(self._hatR.sum(0))
-        z_n = einsum(
-            'jft, ftab, ftab, ftab, dab -> jd', self._V, hatRinv, self._R, hatRinv, self._S, optimize=self._Z_path[0])
+        z_n = trace(einsum('jft, ftab, ftbc, ftce, deg -> jdag', self._V, hatRinv, self._R, hatRinv, self._S,
+                           optimize=self._Z_path[0]), axis1=-1, axis2=-2)
         z_d = einsum('jft, ftab, dab -> jd', self._V, hatRinv, self._S, optimize=self._Z_path[1])
         trXIinvS = einsum('jab, dab -> jd', pinv(self._XI), self._S, optimize=self._Z_path[2])
         self._Z *= ((z_n / (self._F * self._T) + self._nu * trXIinvS) /
@@ -72,7 +72,7 @@ class IS_WLP(IS, PriorBase):
 
     @cached_property
     def _trPsiinvS(self) -> ndarray:
-        return trace(einsum('jab, dbc -> jdac', self._Psiinv, self._S, optimize='optimal'), axis1=-2, axis2=-1)
+        return einsum('jab, dab -> jd', self._Psiinv, self._S)
 
     @cached_property
     def _Z_path(self) -> List[List[Union[str, Tuple[int]]]]:

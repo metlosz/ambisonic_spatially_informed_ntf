@@ -50,11 +50,12 @@ class IS_IWLP(IS, PriorBase):
     def update_Z(self):
         hatRinv = pinv(self._hatR.sum(0))
         XIinv = pinv(self._XI)
-        z_n = einsum(
-            'jft, ftab, ftab, ftab, dab -> jd', self._V, hatRinv, self._R, hatRinv, self._S, optimize=self._Z_path[0])
+        z_n = trace(einsum('jft, ftab, ftbc, ftce, deg -> jdag', self._V, hatRinv, self._R, hatRinv, self._S,
+                           optimize=self._Z_path[0]), axis1=-1, axis2=-2)
         z_d = einsum('jft, ftab, dab -> jd', self._V, hatRinv, self._S, optimize=self._Z_path[1])
         trXIinvS = einsum('jab, dab -> jd', XIinv, self._S, optimize=self._Z_path[2])
-        trPsiXIinvSXIinv = einsum('jab, jab, dab, jab -> jd', self._Psi, XIinv, self._S, XIinv, optimize=self._Z_path[3])
+        trPsiXIinvSXIinv = trace(einsum('jab, jbc, dce, jeg -> jdag', self._Psi, XIinv, self._S, XIinv,
+                                        optimize=self._Z_path[3]), axis1=-1, axis2=-2)
         self._Z *= ((z_n / (self._F * self._T) + self._nu * trPsiXIinvSXIinv) /
                     (z_d / (self._F * self._T) + self._L * trPsiXIinvSXIinv + (self._nu + self._L) * trXIinvS)).real
         NTFBase.update_Z(self)
@@ -72,6 +73,6 @@ class IS_IWLP(IS, PriorBase):
     def _Z_path(self):
         Z_path = super()._Z_path
         Z_path.append(einsum_path('jab, dab -> jd', empty((self._J, self._L, self._L)), self._S, optimize='optimal')[0])
-        Z_path.append(einsum_path('jab, jab, dab, jab -> jd', self._Psi, empty((self._J, self._L, self._L)), self._S,
+        Z_path.append(einsum_path('jab, jbc, dce, jeg -> jdag', self._Psi, empty((self._J, self._L, self._L)), self._S,
                                   empty((self._J, self._L, self._L)), optimize='optimal')[0])
         return Z_path
