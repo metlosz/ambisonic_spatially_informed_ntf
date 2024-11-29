@@ -10,5 +10,5 @@ setup(name='asintf',
       description='',
       long_description=long_description,
       long_description_content_type='text/markdown',
-      url='https://github.com/metlosz/ambisonic_spatially_informed_ntf_private',
+      url='https://github.com/metlosz/ambisonic_spatially_informed_ntf',
       packages=['asintf'])
